@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.33.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3VuMjAwODA4MDhtdCIsImEiOiJhZDNiZDk3NmVkMjU2MmViODE4OGUwNzBjNTI0Yzk0MCJ9.ErUAk5LPIVLPa8NWaID7bg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+//        style: 'mapbox://styles/mapbox/light-v9',
+        style: {
+            version: 8,
+            sources: {},
+            layers: []
+        },
+        zoom: 13,
+        center: [114.348864, 30.58394]
+    });
+
+    map.on('load', function() {
+        alert('loaded');
+        map.addLayer({
+            'id': 'wms-test-layer',
+            'type': 'raster',
+            'source': {
+                'type': 'raster',
+                'tiles': [
+                    'http://webrd01.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8'
+                ],
+                'tileSize': 256
+            },
+            'paint': {}
+        });
+    });
+</script>
+
+</body>
+</html>

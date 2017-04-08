@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!--<script src="mapbox-gl.js"></script>-->
+    <!--<link href="mapbox-gl.css" rel="stylesheet"/>-->
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+    //    var style = {
+    //        "version": 8,
+    //        "name": "nyc_roads",
+    //        "sources": {
+    //            "nyc": {
+    //                "type": "vector",
+    //                "tiles": [
+    //                    "http://localhost:3000/{z}/{x}/{y}.pbf"
+    //                ],
+    //                "minzoom": 11,
+    //                "maxzoom": 16
+    //            }
+    //        },
+    //        "layers": [
+    //            {
+    //                "id": "background",
+    //                "type": "background",
+    //                "paint": {
+    //                    "background-color": "black"
+    //                }
+    //            },
+    //            {
+    //                "id": "edges",
+    //                "type": "line",
+    //                "source": "nyc",
+    //                "source-layer": "edges",
+    //                "paint": {
+    //                    "line-color": "blue"
+    //                }
+    //            },
+    //            {
+    //                "id": "nodes",
+    //                "type": "circle",
+    //                "source": "nyc",
+    //                "source-layer": "nodes",
+    //                "paint": {
+    //                    "circle-color": "red"
+    //                }
+    //            }
+    //        ]
+    //    };
+    //
+    //    var map = new mapboxgl.Map({
+    //        container: 'map',
+    //        center: [-73.9141, 40.7306],
+    //        style: style,
+    //        zoom: 11
+    //    });
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3VuMjAwODA4MDhtdCIsImEiOiJhZDNiZDk3NmVkMjU2MmViODE4OGUwNzBjNTI0Yzk0MCJ9.ErUAk5LPIVLPa8NWaID7bg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [114.34933109617228, 30.58475529219408],
+        zoom: 18
+    });
+
+    var line = {
+        "type": "LineString",
+        "coordinates": [[114.34933109617228, 30.58475529219408], [114.34930669552028, 30.5847720560008], [114.34928508883607, 30.584787143426848], [114.34926310962281, 30.584802417117412], [114.3492385227063, 30.584819367188647], [114.34922008251891, 30.584832219440464], [114.34919773077662, 30.584847679395548], [114.34917258506654, 30.584865188260345], [114.34915023332425, 30.584880648215428], [114.34912844037552, 30.584895735641474], [114.34910906886553, 30.584909146686847], [114.34908299183286, 30.5849272143452], [114.34906082635509, 30.584942674300283], [114.34904182737414, 30.584955899081137], [114.34899805521215, 30.58498626019775], [114.34884215180968, 30.5848784130412], [114.34884215180968, 30.584878599305718], [114.3486383784258, 30.584732195393716], [114.34883339737728, 30.584548538577895], [114.34895614569537, 30.584644464805226], [114.34895614569537, 30.584644278540708], [114.34894217585644, 30.584630122437257], [114.3489770073215, 30.58460665310785], [114.34891125594626, 30.584591938210842], [114.34885034744852, 30.584556175423177], [114.34888666902974, 30.584459317873254], [114.34882743691267, 30.5844460930924], [114.34880881046077, 30.58441554571127], [114.3487847823378, 30.584328560180854], [114.34887400304244, 30.584294287509344], [114.34889747237185, 30.58429745400617], [114.34891349112048, 30.58425796592812], [114.34891777520443, 30.584208792095083], [114.34891125594626, 30.584148628655417], [114.3488589156164, 30.584098150970746], [114.3487467843759, 30.584061829389523], [114.3487154919367, 30.583933493135874], [114.34867935662, 30.583786157901276], [114.34867786650385, 30.583719102674404], [114.3485603335923, 30.583721151584115], [114.34854673628242, 30.583664154641273]]
+    };
+
+    map.on('load', function () {
+
+        map.addLayer({
+            "id": "route",
+            "type": "line",
+            "source": {
+                "type": "geojson",
+                "data": {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": line
+                }
+            },
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "#888",
+                "line-width": 8
+            }
+        });
+    });
+</script>
+</body>
+</html>
