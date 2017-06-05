@@ -165,3 +165,9 @@ console.dir(JSON.stringify(res3));
 
 const res4 = msgpack.decode(buffer4);
 console.dir(JSON.stringify(res4));
+
+const geojson = {"type":"Polygon","coordinates":[[[114.39260108472314,30.49823318784939],[114.39259564003382,30.498213009510554],[114.39253487330433,30.4982294061013],[114.39254031799365,30.498249584440135],[114.39260108472314,30.49823318784939]]]}
+const buf = geobuf.encode(geojson, new Pbf());
+console.log(buf.byteLength);
+const resJson = geobuf.decode(new Pbf(buf));
+console.log(JSON.stringify(resJson));
